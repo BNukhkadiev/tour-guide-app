@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark" style="color:white">
+    <div class="col-md-5 p-lg-3 mx-auto my-5">
+        <h1 class="display-14 font-weight-normal">Attractions in {{city}}</h1>
+    </div>
+    <ul>
+        {% for attraction in attractions %}
+        <li>{{ attraction }}</li>
+        {% endfor %}
+    </ul>
+    <a class="btn btn-md btn-outline btn-primary" href="{{ url_for('home_page') }}">Search Again</a>
+</div>
+
+
+{% endblock %}
