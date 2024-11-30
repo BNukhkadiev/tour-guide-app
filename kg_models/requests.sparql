@@ -1,0 +1,41 @@
+CULTURAL_SITES_QUERY
+SELECT DISTINCT ?site ?siteLabel_en ?siteLabel_de ?description_en ?description_de ?image ?coordinates
+WHERE {
+  # Match the city by user-provided name
+  ?city rdfs:label "CITY_NAME"@en.
+
+  # Match notable places in the city
+  ?site (wdt:P276|wdt:P131) ?city;    # Located in or administratively part of the city
+        wdt:P31 ?type.               # Instance of certain types
+
+  # Include relevant types for tourist attractions
+  VALUES ?type { 
+    wd:Q570116  # Tourist attraction
+    wd:Q4989906  # Cultural heritage site
+    wd:Q33506    # Museum
+    wd:Q11755880 # Landmark
+    wd:Q811979   # Architectural structure
+    wd:Q811430   # Building
+    wd:Q39614    # Monument
+    wd:Q34536    # Historic site
+  }
+
+  # Optional details about the site
+  OPTIONAL { ?site schema:description ?description_en. FILTER(LANG(?description_en) = "en") }
+  OPTIONAL { ?site schema:description ?description_de. FILTER(LANG(?description_de) = "de") }
+  OPTIONAL { ?site wdt:P18 ?image. }  # Optional image
+  OPTIONAL { ?site wdt:P625 ?coordinates. }  # Optional coordinates
+
+  # Fetch labels explicitly in both English and German
+  OPTIONAL { ?site rdfs:label ?siteLabel_en. FILTER(LANG(?siteLabel_en) = "en") }
+  OPTIONAL { ?site rdfs:label ?siteLabel_de. FILTER(LANG(?siteLabel_de) = "de") }
+}
+LIMIT 20
+
+CITY_INFO_QUERY
+SELECT ?city ?population ?area
+WHERE {
+  ?city rdfs:label "CITY_NAME"@en;
+        wdt:P1082 ?population;  # Population
+        wdt:P2046 ?area.        # Area
+}
