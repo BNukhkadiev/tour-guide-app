@@ -1,20 +1,93 @@
 {% extends "layout.html" %}
 
 {% block title %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+    }
+    header {
+        background-color: #0078d7;
+        color: #fff;
+        text-align: center;
+        padding: 1rem 0;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    .attraction {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 1rem 0;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    .attraction:hover {
+        transform: scale(1.02);
+    }
+    .attraction img {
+        width: 200px;
+        height: auto;
+        object-fit: cover;
+    }
+    .attraction-content {
+        padding: 1rem;
+        flex: 1;
+    }
+    .attraction-title {
+        font-size: 1.25rem;
+        margin: 0 0 0.5rem;
+    }
+    .attraction-description {
+        color: #555;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+</style>
 {% endblock %}
 
 {% block body %}
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark" style="color:white">
-    <div class="col-md-5 p-lg-3 mx-auto my-5">
-        <h1 class="display-14 font-weight-normal">Attractions in {{city}}</h1>
+<header>
+    <h1>Tourist Attractions</h1>
+</header>
+<main class="container my-4">
+    <!-- Example Attraction -->
+    <div class="row attraction align-items-center border rounded shadow-sm p-3">
+        <div class="col-md-4">
+            <img src="https://image.ibb.co/gmmneK/children_593313_340.jpg" alt="Attraction 1" class="img-fluid rounded"  width="70" height="70">
+        </div>
+        <div class="col-md-8">
+            <h2 class="h5">Attraction 1</h2>
+            <p class="text-muted">A beautiful place with breathtaking views and rich history. Perfect for travelers who love nature and adventure.</p>
+        </div>
     </div>
-    <ul>
-        {% for attraction in attractions %}
-        <li>{{ attraction }}</li>
-        {% endfor %}
-    </ul>
-    <a class="btn btn-md btn-outline btn-primary" href="{{ url_for('home_page') }}">Search Again</a>
-</div>
+
+    <!-- Add more attractions -->
+    <div class="row attraction align-items-center border rounded shadow-sm p-3">
+        <div class="col-md-4">
+            <img src="https://image.ibb.co/e0RLzK/entrepreneur_1340649_340.jpg" alt="Attraction 2" class="img-fluid rounded">
+        </div>
+        <div class="col-md-8">
+            <h2 class="h5">Attraction 2</h2>
+            <p class="text-muted">A vibrant destination full of cultural heritage and modern amenities. A must-visit for everyone!</p>
+        </div>
+    </div>
+</main>
+
+    <img src="https://image.ibb.co/e0RLzK/entrepreneur_1340649_340.jpg"/>
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/AC_Fassade_Wespienhaus_2023.jpg" width="100" height="132"/>
 
 
 {% endblock %}
+
+
+<img src="https://image.ibb.co/gmmneK/children_593313_340.jpg", width="70" height="70"/>

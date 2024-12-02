@@ -43,6 +43,18 @@ def execute_query(query, location_name):
         return []
 
 # Function to get city information
+# def get_city_info(queries, location_name):
+#     city_info_query = queries.get("CITY_INFO_QUERY")
+#     city_info_results = execute_query(city_info_query, location_name)
+#     city_info = []
+#     for result in city_info_results:
+#         city_info.append({
+#             "city": result["city"]["value"],
+#             "population": result["population"]["value"],
+#             "area": result["area"]["value"]
+#         })
+#     return city_info
+
 def get_city_info(queries, location_name):
     city_info_query = queries.get("CITY_INFO_QUERY")
     city_info_results = execute_query(city_info_query, location_name)
@@ -62,8 +74,17 @@ def get_cultural_sites(queries, location_name):
     cultural_sites = []
     for result in cultural_sites_results:
         cultural_sites.append({
-            "site": result["siteLabel"]["value"],
-            "description": result.get("description", {}).get("value", "No description available"),
+            "siteLabel_en": result.get("siteLabel_en", {}).get("value", "No description available"),
+            "siteLabel_de": result.get("siteLabel_de", {}).get("value", "No description available"),
+            "description_en": result.get("description_en", {}).get("value", "No description available"),
+            "description_de": result.get("description_de", {}).get("value", "No description available"),
             "image": result.get("image", {}).get("value", "No image available")
         })
     return cultural_sites
+
+
+queries = load_queries(FILE_NAME)
+# print(get_cultural_sites(queries=queries, location_name='Aachen'))
+print(get_city_info(queries=queries, location_name='Berlin'))
+
+
