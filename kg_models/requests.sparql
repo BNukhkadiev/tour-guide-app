@@ -1,7 +1,7 @@
 CULTURAL_SITES_QUERY
 SELECT DISTINCT ?site ?siteLabel_en ?siteLabel_de ?description_en ?description_de ?image ?coordinates
 WHERE {
-  ?city rdfs:label "Aachen"@en.
+  ?city rdfs:label "CITY_NAME"@en.
   ?site (wdt:P276|wdt:P131) ?city;
   wdt:P31 ?type.
   VALUES ?type { 

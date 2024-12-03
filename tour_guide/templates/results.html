@@ -1,7 +1,6 @@
-{% extends "layout.html" %}
-
 {% block title %}
 <style>
+    /* General Body and Header */
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -12,82 +11,203 @@
         background-color: #0078d7;
         color: #fff;
         text-align: center;
-        padding: 1rem 0;
+        position: relative;
+        padding: 1.5rem 0; /* Reduced padding */
+        font-size: 2rem; /* Adjusted font size */
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem; /* Reduced spacing below header */
     }
+
+    /* Back to Home Button (Top-Left) */
+    .back-button {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+        background-color: #5a6268;
+    }
+
+    /* Container for all content */
     .container {
         max-width: 1200px;
-        margin: 2rem auto;
+        margin: 0 auto;
         padding: 0 1rem;
     }
+
+    /* City Information Section */
+    .city-info {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    .city-info p {
+        margin: 0.5rem 0;
+    }
+
+    /* Attractions Section */
+    .attractions {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+    .attractions h2 {
+        font-size: 1.5rem;
+        color: #0078d7;
+        text-align: center;
+        border-bottom: 2px solid #0078d7;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    /* Individual Attraction Card */
     .attraction {
         display: flex;
         align-items: center;
         background: #fff;
         border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 0.8rem;
         overflow: hidden;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .attraction:hover {
         transform: scale(1.02);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
     }
+
+    /* Attraction Image */
     .attraction img {
-        width: 200px;
-        height: auto;
+        width: 180px;
+        height: 120px;
         object-fit: cover;
+        border-right: 1px solid #ddd;
+        margin-right: 1rem;
     }
+
+    /* Attraction Content */
     .attraction-content {
-        padding: 1rem;
+        padding: 0.5rem;
         flex: 1;
     }
     .attraction-title {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         margin: 0 0 0.5rem;
+        color: #333;
     }
     .attraction-description {
         color: #555;
         font-size: 0.9rem;
-        line-height: 1.5;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
     }
 
+    /* Button Styles */
+    .btn {
+        text-decoration: none;
+        color: #fff;
+        background-color: #0078d7;
+        border: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+    .btn:hover {
+        background-color: #005bb5;
+    }
+
+    /* Responsive Design for Smaller Screens */
+    @media (max-width: 768px) {
+        .attraction {
+            flex-direction: column;
+            text-align: center;
+        }
+        .attraction img {
+            width: 100%;
+            height: auto;
+            margin: 0 0 0.5rem 0;
+            border-right: none;
+        }
+        .attraction-content {
+            padding: 0;
+        }
+        .btn {
+            display: block;
+            margin: 0.5rem auto;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block body %}
 <header>
+    <!-- Back to Home Button (Top-Left Corner) -->
+    <a href="" class="back-button">Back to Home</a>
     <h1>Tourist Attractions</h1>
 </header>
 <main class="container my-4">
-    <!-- Example Attraction -->
-    <div class="row attraction align-items-center border rounded shadow-sm p-3">
-        <div class="col-md-4">
-            <img src="https://image.ibb.co/gmmneK/children_593313_340.jpg" alt="Attraction 1" class="img-fluid rounded"  width="70" height="70">
-        </div>
-        <div class="col-md-8">
-            <h2 class="h5">Attraction 1</h2>
-            <p class="text-muted">A beautiful place with breathtaking views and rich history. Perfect for travelers who love nature and adventure.</p>
-        </div>
+    <!-- City Information Section -->
+    <div class="city-info">
+        <p><strong>City:</strong> {{ city }}</p>
+        <p><strong>Population:</strong> {{ city_info.population }}</p>
+        <p><strong>Area:</strong> {{ city_info.area }} km²</p>
     </div>
 
-    <!-- Add more attractions -->
-    <div class="row attraction align-items-center border rounded shadow-sm p-3">
-        <div class="col-md-4">
-            <img src="https://image.ibb.co/e0RLzK/entrepreneur_1340649_340.jpg" alt="Attraction 2" class="img-fluid rounded">
-        </div>
-        <div class="col-md-8">
-            <h2 class="h5">Attraction 2</h2>
-            <p class="text-muted">A vibrant destination full of cultural heritage and modern amenities. A must-visit for everyone!</p>
-        </div>
+    <!-- Tourist Attractions Section -->
+    <div class="attractions">
+        <h2>Top Attractions</h2>
+        {% if attractions|length > 0 %}
+            {% for attraction in attractions %}
+            <div class="row attraction align-items-center border rounded shadow-sm p-3 mb-3">
+                <div class="col-md-4 text-center">
+                    <img 
+                        src="{{ attraction.image if attraction.image != 'No image available' else 'https://via.placeholder.com/200x150?text=No+Image' }}" 
+                        alt="{{ attraction.siteLabel_en if attraction.siteLabel_en != 'No description available' else 'Attraction Image' }}" 
+                        class="img-fluid rounded">
+                </div>
+                <div class="col-md-8 attraction-content">
+                    <h3 class="attraction-title">
+                        {{ attraction.siteLabel_en if attraction.siteLabel_en != 'No description available' else attraction.siteLabel_de if attraction.siteLabel_de != 'No description available' else 'Unknown Attraction' }}
+                    </h3>
+                    <p class="attraction-description">
+                        {% if attraction.description_en != 'No description available' %}
+                            {{ attraction.description_en }}
+                        {% elif attraction.description_de != 'No description available' %}
+                            {{ attraction.description_de }}
+                        {% else %}
+                            No description available.
+                        {% endif %}
+                    </p>
+                    {% if attraction.google_maps_link %}
+                    <a href="https://www.google.com/maps/dir/?api=1&destination={{ attraction.google_maps_link.split('=')[1] }}" 
+                       target="_blank" 
+                       class="btn">
+                        Get Directions
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted text-center">No attractions found for this city.</p>
+        {% endif %}
     </div>
 </main>
-
-    <img src="https://image.ibb.co/e0RLzK/entrepreneur_1340649_340.jpg"/>
-
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/AC_Fassade_Wespienhaus_2023.jpg" width="100" height="132"/>
-
-
 {% endblock %}
-
-
-<img src="https://image.ibb.co/gmmneK/children_593313_340.jpg", width="70" height="70"/>
